@@ -3,11 +3,7 @@ import csv
 import plotly_express as px
 
 df = pd.read_csv("p107Data.csv") 
-mean = df.groupby("level")["attempt"].mean()
-
-
+mean = df.groupby(["student_id", "level"], as_index=False)["attempt"].mean() 
 print(mean)
-
-fig = px.scatter(mean, x= mean , y="attempt" ,color='attempt',
-                   size_max=60)
+fig = px.scatter(mean, x="student_id", y="level", size="attempt", color="attempt")
 fig.show()
